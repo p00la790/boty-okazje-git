@@ -2,8 +2,8 @@ name: Bot okazji
 
 on:
   schedule:
-    # Uruchamia bota co 15 minut, 24 godziny na dobę, za darmo.
-    - cron: '*/15 * * * *'
+    # Uruchamia bota co 5 minut, 24 godziny na dobę, za darmo.
+    - cron: '*/5 * * * *'
   workflow_dispatch:
     # Pozwala też ręcznie odpalić bota z zakładki "Actions" na GitHubie.
 
