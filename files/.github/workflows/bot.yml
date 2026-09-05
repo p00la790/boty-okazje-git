@@ -1,0 +1,48 @@
+name: Bot okazji
+
+on:
+  schedule:
+    # Uruchamia bota co 10 minut, 24 godziny na dobę, za darmo.
+    # (Czas w formacie UTC - nie trzeba nic przeliczać, to tylko cykliczność)
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    # Pozwala też ręcznie odpalić bota z zakładki "Actions" na GitHubie,
+    # przydatne do testowania bez czekania na harmonogram.
+
+permissions:
+  contents: write  # potrzebne, żeby bot mógł zapisać zaktualizowaną pamięć (seen.json)
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz kod
+        uses: actions/checkout@v4
+
+      - name: Zainstaluj Pythona
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Zainstaluj zależności i przeglądarkę
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Uruchom bota (jedno sprawdzenie)
+        env:
+          DISCORD_WEBHOOK_IPHONE: ${{ secrets.DISCORD_WEBHOOK_IPHONE }}
+          DISCORD_WEBHOOK_IPAD: ${{ secrets.DISCORD_WEBHOOK_IPAD }}
+          DISCORD_WEBHOOK_IMAC: ${{ secrets.DISCORD_WEBHOOK_IMAC }}
+          DISCORD_WEBHOOK_MACBOOK: ${{ secrets.DISCORD_WEBHOOK_MACBOOK }}
+          DISCORD_WEBHOOK_APPLEWATCH: ${{ secrets.DISCORD_WEBHOOK_APPLEWATCH }}
+          DISCORD_WEBHOOK_MACMINI: ${{ secrets.DISCORD_WEBHOOK_MACMINI }}
+        run: python run_once.py
+
+      - name: Zapisz pamięć bota (żeby nie wysyłał tych samych ofert drugi raz)
+        run: |
+          git config user.name "okazje-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add seen.json
+          git diff --quiet --cached || git commit -m "aktualizacja pamieci bota"
+          git push
