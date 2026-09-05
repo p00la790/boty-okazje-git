@@ -2,19 +2,23 @@ name: Bot okazji
 
 on:
   schedule:
-    # Uruchamia bota co 10 minut, 24 godziny na dobę, za darmo.
-    # (Czas w formacie UTC - nie trzeba nic przeliczać, to tylko cykliczność)
-    - cron: '*/10 * * * *'
+    # Uruchamia bota co 15 minut, 24 godziny na dobę, za darmo.
+    - cron: '*/15 * * * *'
   workflow_dispatch:
-    # Pozwala też ręcznie odpalić bota z zakładki "Actions" na GitHubie,
-    # przydatne do testowania bez czekania na harmonogram.
+    # Pozwala też ręcznie odpalić bota z zakładki "Actions" na GitHubie.
 
 permissions:
-  contents: write  # potrzebne, żeby bot mógł zapisać zaktualizowaną pamięć (seen.json)
+  contents: write
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        # WAŻNE: cały kod bota leży w podfolderze "files", nie w głównym
+        # folderze repozytorium - więc każda komenda "run" poniżej
+        # wykonuje się w środku tego podfolderu.
+        working-directory: files
     steps:
       - name: Pobierz kod
         uses: actions/checkout@v4
