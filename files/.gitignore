@@ -1,0 +1,11 @@
+# NIGDY nie wysyłaj tego pliku na GitHub - zawiera prawdziwe webhooki
+secrets_local.py
+
+# Pliki tymczasowe Pythona - nie potrzebne w repozytorium
+__pycache__/
+*.pyc
+
+# Pamięć bota - zostaje zarządzana przez sam bot (workflow ją commituje)
+# Ale jeśli wolisz, żeby GitHub Actions zawsze zaczynał "na czysto" -
+# możesz odkomentować poniższą linijkę:
+# seen.json
