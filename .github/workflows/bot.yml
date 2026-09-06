@@ -2,10 +2,17 @@ name: Bot okazji
 
 on:
   schedule:
-    # Uruchamia bota co 5 minut, 24 godziny na dobę, za darmo.
-    - cron: '*/5 * * * *'
+    # Co 10 minut - kompromis miedzy szybkoscia a tym, zeby przebieg zdazyl
+    # sie skonczyc zanim zacznie sie kolejny.
+    - cron: '*/10 * * * *'
   workflow_dispatch:
-    # Pozwala też ręcznie odpalić bota z zakładki "Actions" na GitHubie.
+
+# KLUCZOWE: to nie pozwala dwoch przebiegom dzialac naraz. Jesli poprzedni
+# jeszcze nie skonczyl (np. bo Vinted wolniej odpowiadal), kolejny CZEKA
+# w kolejce zamiast startowac rownolegle - to naprawia duplikaty w seen.json.
+concurrency:
+  group: bot-okazje-run
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -15,9 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # WAŻNE: cały kod bota leży w podfolderze "files", nie w głównym
-        # folderze repozytorium - więc każda komenda "run" poniżej
-        # wykonuje się w środku tego podfolderu.
         working-directory: files
     steps:
       - name: Pobierz kod
@@ -28,7 +32,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Zainstaluj zależności i przeglądarkę
+      - name: Zainstaluj zaleznosci i przegladarke
         run: |
           pip install -r requirements.txt
           python -m playwright install --with-deps chromium
@@ -43,10 +47,13 @@ jobs:
           DISCORD_WEBHOOK_MACMINI: ${{ secrets.DISCORD_WEBHOOK_MACMINI }}
         run: python run_once.py
 
-      - name: Zapisz pamięć bota (żeby nie wysyłał tych samych ofert drugi raz)
+      - name: Zapisz pamiec bota (zeby nie wysylal tych samych ofert drugi raz)
         run: |
           git config user.name "okazje-bot"
           git config user.email "bot@users.noreply.github.com"
           git add seen.json
           git diff --quiet --cached || git commit -m "aktualizacja pamieci bota"
+          # pull --rebase na wszelki wypadek, gdyby cos innego zdazylo
+          # zapisac cos do repo miedzy checkout a teraz
+          git pull --rebase
           git push

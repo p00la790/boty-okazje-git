@@ -15,7 +15,7 @@ import json
 import os
 import time
 
-from config import SEARCHES, CHECK_INTERVAL_MINUTES, SEEN_FILE, OLX_REQUIRE_SHIPPING_BADGE, ONLY_SEND_ACTUAL_DEALS
+from config import SEARCHES, CHECK_INTERVAL_MINUTES, SEEN_FILE, OLX_REQUIRE_SHIPPING_BADGE, ONLY_SEND_ACTUAL_DEALS, ACTIVE_PLATFORMS, ACTIVE_CATEGORIES
 from filters import is_suspicious, is_bad_condition, is_ignored_model
 from price_utils import price_in_range
 from discord_notifier import send_listing, send_text
@@ -27,6 +27,17 @@ SCRAPERS = {
     "allegro_lokalnie": allegro_lokalnie_scraper,
     "vinted": vinted_scraper,
 }
+
+
+def get_active_searches() -> list:
+    """Zwraca wyszukiwania z config.py przefiltrowane przez ACTIVE_PLATFORMS
+    i ACTIVE_CATEGORIES (jeśli te listy są puste - zwraca wszystko bez zmian)."""
+    searches = SEARCHES
+    if ACTIVE_PLATFORMS:
+        searches = [s for s in searches if s["platform"] in ACTIVE_PLATFORMS]
+    if ACTIVE_CATEGORIES:
+        searches = [s for s in searches if s["category"] in ACTIVE_CATEGORIES]
+    return searches
 
 
 def load_seen() -> set:
@@ -42,7 +53,9 @@ def save_seen(seen: set):
 
 
 def check_all(seen: set):
-    for search in SEARCHES:
+    active_searches = get_active_searches()
+    print(f"=== Sprawdzam {len(active_searches)} z {len(SEARCHES)} wyszukiwań (filtr ACTIVE_PLATFORMS/ACTIVE_CATEGORIES) ===")
+    for search in active_searches:
         platform = search["platform"]
         scraper = SCRAPERS.get(platform)
         if not scraper:
