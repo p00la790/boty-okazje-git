@@ -274,8 +274,6 @@ BLACKLIST_PHRASES = [
     "nie wysylam przez vinted",
 ]
 
-OLX_REQUIRE_SHIPPING_BADGE = False
-
 ONLY_SEND_ACTUAL_DEALS = True
 
 CONDITION_BLACKLIST_PHRASES = [
@@ -358,5 +356,5 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 #   ACTIVE_CATEGORIES = ["iphone"]
 #
 # Żeby wrócić do sprawdzania wszystkiego - po prostu wyczyść obie listy: [].
-ACTIVE_PLATFORMS = ["vinted"]    # np. ["vinted"] albo ["vinted", "olx"]
-ACTIVE_CATEGORIES = ["iphone"]   # np. ["iphone"] albo ["iphone", "ipad"]
+ACTIVE_PLATFORMS = ["olx"]    # np. ["vinted"] albo ["vinted", "olx"]
+ACTIVE_CATEGORIES = ["ipad,  iphone,  macbook"]   # np. ["iphone"] albo ["iphone", "ipad"]
