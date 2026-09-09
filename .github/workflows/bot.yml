@@ -2,9 +2,9 @@ name: Bot okazji
 
 on:
   schedule:
-    # Co 20 minut - kompromis miedzy szybkoscia a tym, zeby przebieg zdazyl
+    # Co 15 minut - kompromis miedzy szybkoscia a tym, zeby przebieg zdazyl
     # sie skonczyc zanim zacznie sie kolejny.
-    - cron: '*/20 * * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 # KLUCZOWE: to nie pozwala dwoch przebiegom dzialac naraz. Jesli poprzedni
