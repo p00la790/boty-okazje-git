@@ -83,6 +83,46 @@ SEARCHES = [
         "price_max": 5000,
     },
     {
+        "name": "MacBook air 2019 Vinted",
+        "platform": "vinted",
+        "category": "macbook",
+        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20air%202019&status_ids[]=2&page=1&time=1789056275",
+        "price_min": 200,
+        "price_max": 420,
+    },
+    {
+        "name": "MacBook air 2018 Vinted",
+        "platform": "vinted",
+        "category": "macbook",
+        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20air%202018&status_ids[]=2&page=1&time=1789056368&search_by_image_uuid=&search_by_image_id=",
+        "price_min": 200,
+        "price_max": 420,
+    },
+    {
+        "name": "MacBook air 2020 Vinted",
+        "platform": "vinted",
+        "category": "macbook",
+        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20air%202020&status_ids[]=2&page=1&time=1789056328&search_by_image_uuid=&search_by_image_id=",
+        "price_min": 300,
+        "price_max": 530,
+    },
+    {
+        "name": "MacBook Pro 13 2019 Vinted",
+        "platform": "vinted",
+        "category": "macbook",
+        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20pro%2013%202019&status_ids[]=2&page=1&time=1789056446&search_by_image_uuid=&search_by_image_id=",
+        "price_min": 350,
+        "price_max": 620,
+    },
+     {
+        "name": "MacBook Pro 13 2020 Vinted",
+        "platform": "vinted",
+        "category": "macbook",
+        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20pro%2013%202020&status_ids[]=2&page=1&time=1789056494&search_by_image_uuid=&search_by_image_id=",
+        "price_min": 350,
+        "price_max": 620,
+    },
+    {
         "name": "MacBook olx",
         "platform": "olx",
         "category": "macbook",
@@ -359,4 +399,4 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 #
 # Żeby wrócić do sprawdzania wszystkiego - po prostu wyczyść obie listy: [].
 ACTIVE_PLATFORMS = ["vinted"]    # np. ["vinted"] albo ["vinted", "olx"]
-ACTIVE_CATEGORIES = ["iphone",  "macbook"]   # np. ["iphone"] albo ["iphone", "ipad"]
+ACTIVE_CATEGORIES = ["macbook"]   # np. ["iphone"] albo ["iphone", "ipad"]
