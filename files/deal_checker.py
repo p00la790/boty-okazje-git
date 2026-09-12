@@ -22,9 +22,21 @@ def find_best_match(title: str):
     """
     Zwraca najbardziej pasujący wpis z cennika (ten z najdłuższym "match"),
     albo None jeśli nic nie pasuje.
+
+    Respektuje opcjonalne pole "exclude" w cenniku - jeśli którakolwiek fraza
+    z "exclude" pojawia się w tytule, ten wpis NIE jest brany pod uwagę
+    (np. ogólny wpis "MacBook Pro 13" nie powinien łapać modelu z 2011 roku).
     """
     normalized_title = _normalize(title)
-    candidates = [entry for entry in CENNIK if entry["match"] in normalized_title]
+    candidates = []
+    for entry in CENNIK:
+        if entry["match"] not in normalized_title:
+            continue
+        excludes = entry.get("exclude", [])
+        if any(ex in normalized_title for ex in excludes):
+            continue
+        candidates.append(entry)
+
     if not candidates:
         return None
     # najbardziej szczegółowy = najdłuższy tekst dopasowania

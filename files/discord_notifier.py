@@ -11,7 +11,7 @@ import requests
 from config import CATEGORY_WEBHOOKS
 
 
-def send_listing(listing: dict, search_name: str, category: str, deal_info: dict = None):
+def send_listing(listing: dict, search_name: str, category: str, deal_info: dict = None, is_damage_candidate: bool = False):
     webhook_url = CATEGORY_WEBHOOKS.get(category, "")
     if not webhook_url:
         print(f"   [uwaga] brak webhooka dla kategorii '{category}' - pomijam wysyłkę (ale ogłoszenie zaliczone jako widziane)")
@@ -25,7 +25,18 @@ def send_listing(listing: dict, search_name: str, category: str, deal_info: dict
 
     color = 3066993  # zielony (domyślny)
 
-    if deal_info:
+    if is_damage_candidate:
+        color = 15158332  # czerwono-pomarańczowy - "do naprawy"
+        description_lines.append("🛠️ **KANDYDAT DO NAPRAWY** (uszkodzony ekran/bateria)")
+        if deal_info:
+            description_lines.append(
+                f"ℹ️ Dopasowano do: {deal_info['label']}"
+            )
+            description_lines.append(
+                f"📈 Cena sprawnego egzemplarza: {deal_info['sell_min']}-{deal_info['sell_max']} zł "
+                f"(licz sama ile kosztuje naprawa zanim ocenisz opłacalność)"
+            )
+    elif deal_info:
         if deal_info["is_deal"]:
             color = 15844367  # złoty - super okazja
             description_lines.append(
@@ -53,7 +64,13 @@ def send_listing(listing: dict, search_name: str, category: str, deal_info: dict
     if listing.get("image"):
         embed["thumbnail"] = {"url": listing["image"]}
 
-    header = "💎 OKAZJA" if (deal_info and deal_info["is_deal"]) else "🔔 Nowe ogłoszenie"
+    if is_damage_candidate:
+        header = "🛠️ DO NAPRAWY"
+    elif deal_info and deal_info["is_deal"]:
+        header = "💎 OKAZJA"
+    else:
+        header = "🔔 Nowe ogłoszenie"
+
     payload = {
         "content": f"{header}: **{search_name}**",
         "embeds": [embed],

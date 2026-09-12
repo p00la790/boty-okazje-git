@@ -15,8 +15,8 @@ import json
 import os
 import time
 
-from config import SEARCHES, CHECK_INTERVAL_MINUTES, SEEN_FILE, OLX_REQUIRE_SHIPPING_BADGE, ONLY_SEND_ACTUAL_DEALS, ACTIVE_PLATFORMS, ACTIVE_CATEGORIES
-from filters import is_suspicious, is_bad_condition, is_ignored_model
+from config import SEARCHES, CHECK_INTERVAL_MINUTES, SEEN_FILE, OLX_REQUIRE_SHIPPING_BADGE, ONLY_SEND_ACTUAL_DEALS, ACTIVE_PLATFORMS, ACTIVE_CATEGORIES, DAMAGE_HUNTING_CATEGORIES
+from filters import is_suspicious, is_bad_condition, is_ignored_model, has_damage_keyword, is_damage_hard_excluded
 from price_utils import price_in_range
 from discord_notifier import send_listing, send_text
 from deal_checker import evaluate_listing
@@ -118,14 +118,39 @@ def check_all(seen: set):
                 print(f"   [pominięto - podejrzany opis] {listing['title']}")
                 continue
 
-            # zły stan sprzętu (uszkodzony, zablokowany, na części itp.)
+            category = search["category"]
             full_text = f"{listing['title']} {description}"
-            if is_bad_condition(full_text):
-                print(f"   [pominięto - zły stan sprzętu] {listing['title']}")
-                continue
+            hunting_damage = category in DAMAGE_HUNTING_CATEGORIES
 
-            # sprawdź cennik - czy to znany model, i czy cena to okazja
+            if hunting_damage:
+                # TRYB ODWRÓCONY: szukamy uszkodzonych (do naprawy), więc
+                # ODRZUCAMY ogłoszenia, które NIE wspominają o uszkodzeniu
+                # ekranu/baterii - to nie to czego teraz szukamy.
+                if is_damage_hard_excluded(full_text):
+                    print(f"   [pominięto - uszkodzenie nie do naprawy (iCloud/kradzione/zalane)] {listing['title']}")
+                    continue
+                if not has_damage_keyword(full_text):
+                    print(f"   [pominięto - sprawny sprzęt, szukamy uszkodzonych] {listing['title']}")
+                    continue
+                print(f"   [KANDYDAT DO NAPRAWY] {listing['title']} - {listing['price']}")
+            else:
+                # zły stan sprzętu (uszkodzony, zablokowany, na części itp.)
+                if is_bad_condition(full_text):
+                    print(f"   [pominięto - zły stan sprzętu] {listing['title']}")
+                    continue
+
+            # sprawdź cennik - czy to znany model, i czy cena to okazja.
+            # W trybie "szukaj uszkodzonych" cennik służy TYLKO jako
+            # informacja pomocnicza (etykieta modelu + widełki normalnej
+            # ceny odsprzedaży) - NIE odrzucamy na podstawie is_deal, bo
+            # ekonomia sprzętu do naprawy jest inna niż sprawnego.
             deal_info = evaluate_listing(listing["title"], listing["price"])
+
+            if hunting_damage:
+                if deal_info:
+                    print(f"   [info] dopasowano do: {deal_info['label']} (normalna cena sprawnego: {deal_info['sell_min']}-{deal_info['sell_max']} zł)")
+                send_listing(listing, search["name"], category, deal_info, is_damage_candidate=True)
+                continue
 
             if ONLY_SEND_ACTUAL_DEALS:
                 if not deal_info:
@@ -142,7 +167,6 @@ def check_all(seen: set):
                 else:
                     print(f"   [WYSYŁAM - brak w cenniku] {listing['title']} - {listing['price']}")
 
-            category = search["category"]
             send_listing(listing, search["name"], category, deal_info)
 
     save_seen(seen)

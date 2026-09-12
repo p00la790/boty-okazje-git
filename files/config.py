@@ -54,7 +54,7 @@ SEARCHES = [
         "name": "iPad Vinted",
         "platform": "vinted",
         "category": "ipad",
-        "search_url": "https://www.vinted.pl/catalog?search_text=ipad&catalog[]=3728&page=1&time=1788961175&search_by_image_uuid=&search_by_image_id=",
+        "search_url": "https://www.vinted.pl/catalog?search_text=ipad&search_id=2762314829&catalog[]=3728&page=1&time=1788538349",
         "price_min": 100,
         "price_max": 1350,
     },
@@ -78,49 +78,9 @@ SEARCHES = [
         "name": "MacBook Vinted",
         "platform": "vinted",
         "category": "macbook",
-        "search_url": "https://www.vinted.pl/catalog?search_text=macbook&catalog[]=3580&page=1&time=1788961123",
+        "search_url": "https://www.vinted.pl/catalog?search_text=macbook&search_id=2650017637&catalog[]=3580&page=1&time=1788280927",
         "price_min": 100,
         "price_max": 5000,
-    },
-    {
-        "name": "MacBook air 2019 Vinted",
-        "platform": "vinted",
-        "category": "macbook",
-        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20air%202019&status_ids[]=2&page=1&time=1789056275",
-        "price_min": 200,
-        "price_max": 420,
-    },
-    {
-        "name": "MacBook air 2018 Vinted",
-        "platform": "vinted",
-        "category": "macbook",
-        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20air%202018&status_ids[]=2&page=1&time=1789056368&search_by_image_uuid=&search_by_image_id=",
-        "price_min": 200,
-        "price_max": 420,
-    },
-    {
-        "name": "MacBook air 2020 Vinted",
-        "platform": "vinted",
-        "category": "macbook",
-        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20air%202020&status_ids[]=2&page=1&time=1789056328&search_by_image_uuid=&search_by_image_id=",
-        "price_min": 300,
-        "price_max": 530,
-    },
-    {
-        "name": "MacBook Pro 13 2019 Vinted",
-        "platform": "vinted",
-        "category": "macbook",
-        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20pro%2013%202019&status_ids[]=2&page=1&time=1789056446&search_by_image_uuid=&search_by_image_id=",
-        "price_min": 350,
-        "price_max": 620,
-    },
-     {
-        "name": "MacBook Pro 13 2020 Vinted",
-        "platform": "vinted",
-        "category": "macbook",
-        "search_url": "https://www.vinted.pl/catalog?search_text=macbook%20pro%2013%202020&status_ids[]=2&page=1&time=1789056494&search_by_image_uuid=&search_by_image_id=",
-        "price_min": 350,
-        "price_max": 620,
     },
     {
         "name": "MacBook olx",
@@ -314,7 +274,7 @@ BLACKLIST_PHRASES = [
     "nie wysylam przez vinted",
 ]
 
-OLX_REQUIRE_SHIPPING_BADGE = True
+OLX_REQUIRE_SHIPPING_BADGE = False
 
 ONLY_SEND_ACTUAL_DEALS = True
 
@@ -369,15 +329,29 @@ IGNORED_MODEL_KEYWORDS = [
     "ipad pro 2018", "ipad pro 2020",
     "ipad 1 gen", "ipad 2 gen", "ipad 3 gen", "ipad 4 gen",
     "ipad 5 gen", "ipad 6 gen", "ipad 7 gen",
+    "ipad 2010", "ipad 2011", "ipad 2012", "ipad 2013", "ipad 2014",
+    "ipad 2015", "ipad 2016", "ipad 2017",
+    "ipad (5th", "ipad (6th", "ipad (7th",
+    "ipad 5 generacji", "ipad 6 generacji", "ipad 7 generacji",
+    "ipad mini (1st", "ipad mini (2nd", "ipad mini (3rd", "ipad mini (4th",
+    "ipad mini 1 generacji", "ipad mini 2 generacji", "ipad mini 3 generacji", "ipad mini 4 generacji",
+    "ipad air (1st", "ipad air (2nd", "ipad air (3rd",
+    "ipad air 1 generacji", "ipad air 2 generacji", "ipad air 3 generacji",
     "imac 2009", "imac 2010", "imac 2011", "imac 2012",
     "imac 2013", "imac 2014", "imac 2015",
     "imac 20 cali", "imac 17 cali",
     "macbook 12",
     "powerbook",
     "ibook",
+    "macbook pro 2008", "macbook pro 2009", "macbook pro 2010",
+    "macbook pro 2011", "macbook pro 2012", "macbook pro 2013", "macbook pro 2014",
     "macbook pro 2015", "macbook pro 2016", "macbook pro 2017", "macbook pro 2018",
     "macbook pro 15", "macbook pro 16",
-    "macbook air 2013", "macbook air 2014", "macbook air 2015", "macbook air 2017",
+    "macbook air 2008", "macbook air 2009", "macbook air 2010", "macbook air 2011",
+    "macbook air 2012", "macbook air 2013", "macbook air 2014", "macbook air 2015",
+    "macbook air 2016", "macbook air 2017",
+    "unibody",
+    "polycarbonate", "poliweglan",
     "apple watch series 1", "apple watch series 2", "apple watch series 3",
     "apple watch series 4", "apple watch series 5",
     "apple watch (1st generation)", "apple watch 1 generacji",
@@ -385,7 +359,7 @@ IGNORED_MODEL_KEYWORDS = [
 ]
 
 CHECK_INTERVAL_MINUTES = 3
-REQUEST_DELAY_SECONDS = 5
+REQUEST_DELAY_SECONDS = 3
 SEEN_FILE = "seen.json"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
@@ -398,5 +372,38 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 #   ACTIVE_CATEGORIES = ["iphone"]
 #
 # Żeby wrócić do sprawdzania wszystkiego - po prostu wyczyść obie listy: [].
-ACTIVE_PLATFORMS = ["vinted"]    # np. ["vinted"] albo ["vinted", "olx"]
-ACTIVE_CATEGORIES = ["macbook"]   # np. ["iphone"] albo ["iphone", "ipad"]
+ACTIVE_PLATFORMS = []    # np. ["vinted"] albo ["vinted", "olx"]
+ACTIVE_CATEGORIES = ["iphone", "ipad", "macbook"]   # imac/macmini/applewatch odstawione na teraz
+
+# ---------- TRYB "SZUKAJ USZKODZONYCH" (do samodzielnej naprawy i flipa) ----------
+# Dla kategorii na tej liście bot ODWRACA logikę: zamiast ODRZUCAĆ ogłoszenia
+# z uszkodzonym ekranem/baterią, będzie ich AKTYWNIE SZUKAŁ (bo je naprawiasz).
+# Dla pozostałych kategorii (np. macbook, ipad) nic się nie zmienia - tam nadal
+# szukamy sprawnego sprzętu w dobrej cenie.
+DAMAGE_HUNTING_CATEGORIES = ["iphone"]
+
+# Frazy wskazujące na uszkodzenie EKRANU lub BATERII - to jest to, czego
+# teraz aktywnie szukamy dla kategorii z DAMAGE_HUNTING_CATEGORIES.
+DAMAGE_KEYWORDS = [
+    "pęknięty ekran", "pekniety ekran",
+    "stłuczony wyświetlacz", "stluczony wyswietlacz",
+    "uszkodzony wyświetlacz", "uszkodzony wyswietlacz",
+    "wyświetlacz pęknięty", "wyswietlacz pekniety",
+    "matryca pęknięta", "matryca pekniety", "pęknięta matryca", "pekniety matryca",
+    "pęknięta szybka", "pekniete szybka", "zbita szybka",
+    "rysa na ekranie", "rysy na ekranie", "głęboka rysa", "gleboka rysa",
+    "pęknięcie ekranu", "pekniecie ekranu", "pęknięty wyświetlacz", "pekniety wyswietlacz",
+    "bateria do wymiany", "słaba bateria", "slaba bateria",
+    "kondycja baterii poniżej", "kondycja baterii ponizej",
+    "martwe piksele", "smugi na ekranie", "smuga na ekranie",
+    "nie działa ekran", "nie dziala ekran", "brak obrazu",
+    "pęknięty tył", "pekniety tyl", "pęknięta obudowa", "pekniete obudowa",
+    "pajączek na ekranie", "pajaczek na ekranie",
+]
+
+# Te frazy ZAWSZE odrzucamy, nawet w trybie "szukaj uszkodzonych" - bo to
+# albo niemożliwe do naprawy, albo zbyt ryzykowne prawnie/technicznie.
+DAMAGE_HARD_EXCLUDE = [
+    "icloud lock", "blokada icloud", "simlock", "sim lock", "zablokowany",
+    "skradziony", "kradziony", "zalany", "zalana", "utopiony", "utopiona",
+]
