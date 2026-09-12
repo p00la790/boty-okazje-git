@@ -372,8 +372,8 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 #   ACTIVE_CATEGORIES = ["iphone"]
 #
 # Żeby wrócić do sprawdzania wszystkiego - po prostu wyczyść obie listy: [].
-ACTIVE_PLATFORMS = []    # np. ["vinted"] albo ["vinted", "olx"]
-ACTIVE_CATEGORIES = ["iphone", "ipad", "macbook"]   # imac/macmini/applewatch odstawione na teraz
+ACTIVE_PLATFORMS = ["vinted"]    # np. ["vinted"] albo ["vinted", "olx"]
+ACTIVE_CATEGORIES = ["iphone", "macbook"]   # imac/macmini/applewatch odstawione na teraz
 
 # ---------- TRYB "SZUKAJ USZKODZONYCH" (do samodzielnej naprawy i flipa) ----------
 # Dla kategorii na tej liście bot ODWRACA logikę: zamiast ODRZUCAĆ ogłoszenia
