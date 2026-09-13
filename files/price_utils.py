@@ -30,7 +30,26 @@ def parse_price(price_text: str):
         return None
 
 
-def price_in_range(price_text: str, price_min, price_max) -> bool:
+def extract_capacity_gb(title: str):
+    """
+    Próbuje wyciągnąć pojemność pamięci (w GB) z tytułu ogłoszenia.
+    Rozpoznaje np. "128GB", "128 GB", "1TB" (zamienia na 1024).
+    Zwraca None jeśli nie znaleziono żadnej pojemności.
+    """
+    if not title:
+        return None
+
+    text = title.lower()
+
+    tb_match = re.search(r"(\d+)\s*tb\b", text)
+    if tb_match:
+        return int(tb_match.group(1)) * 1024
+
+    gb_match = re.search(r"(\d+)\s*gb\b", text)
+    if gb_match:
+        return int(gb_match.group(1))
+
+    return None
     """
     Sprawdza czy cena mieści się w podanym zakresie.
     Jeśli nie da się odczytać ceny -> domyślnie PRZEPUSZCZAMY ogłoszenie
