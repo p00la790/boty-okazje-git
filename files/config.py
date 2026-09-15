@@ -32,7 +32,7 @@ SEARCHES = [
         "category": "iphone",
         "search_url": "https://www.vinted.pl/catalog?search_text=iphone&search_id=2726194668&catalog[]=3661&page=1&time=1788453620&status_ids[]=2",
         "price_min": 100,
-        "price_max": 5000,
+        "price_max": 1000,
     },
     {
         "name": "iPhone Olx",
@@ -56,7 +56,7 @@ SEARCHES = [
         "category": "ipad",
         "search_url": "https://www.vinted.pl/catalog?search_text=ipad&search_id=2762314829&catalog[]=3728&page=1&time=1788538349",
         "price_min": 100,
-        "price_max": 1350,
+        "price_max": 1000,
     },
     {
         "name": "iPad olx",
@@ -64,7 +64,7 @@ SEARCHES = [
         "category": "ipad",
         "search_url": "https://www.olx.pl/elektronika/tablety/q-ipad/",
         "price_min": 100,
-        "price_max": 3200,
+        "price_max": 1000,
     },
     {
         "name": "iPad allegro lokalnie",
@@ -80,7 +80,7 @@ SEARCHES = [
         "category": "macbook",
         "search_url": "https://www.vinted.pl/catalog?search_text=macbook&search_id=2650017637&catalog[]=3580&page=1&time=1788280927",
         "price_min": 100,
-        "price_max": 5000,
+        "price_max": 1000,
     },
     {
         "name": "MacBook olx",
@@ -326,8 +326,8 @@ IGNORED_MODEL_KEYWORDS = [
     "mac mini 2009", "mac mini 2010", "mac mini 2011", "mac mini 2012",
 ]
 
-CHECK_INTERVAL_MINUTES = 3
-REQUEST_DELAY_SECONDS = 3
+CHECK_INTERVAL_MINUTES = 5
+REQUEST_DELAY_SECONDS = 5
 SEEN_FILE = "seen.json"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
@@ -341,7 +341,7 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 #
 # Żeby wrócić do sprawdzania wszystkiego - po prostu wyczyść obie listy: [].
 ACTIVE_PLATFORMS = ["vinted"]    # np. ["vinted"] albo ["vinted", "olx"]
-ACTIVE_CATEGORIES = ["iphone", "macbook"]   # imac/macmini/applewatch odstawione na teraz
+ACTIVE_CATEGORIES = ["ipad", "macbook"]   # imac/macmini/applewatch odstawione na teraz
 
 # ---------- TRYB "SZUKAJ USZKODZONYCH" (do samodzielnej naprawy i flipa) ----------
 # Dla kategorii na tej liście bot ODWRACA logikę: zamiast ODRZUCAĆ ogłoszenia
