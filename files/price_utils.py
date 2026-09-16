@@ -1,8 +1,7 @@
 """
 price_utils.py
 ===============
-Pomocnicza funkcja: zamienia tekst typu "350 zł", "1 200,00 zł", "500zl"
-na zwykłą liczbę (int), żeby móc ją porównać z price_min / price_max.
+Pomocnicze funkcje do pracy z cenami i pojemnościami z tytułów ogłoszeń.
 """
 
 import re
@@ -16,10 +15,8 @@ def parse_price(price_text: str):
     if not price_text:
         return None
 
-    # usuwamy spacje (w tym twarde spacje używane jako separator tysięcy: "1 200 zł")
     cleaned = price_text.replace("\xa0", "").replace(" ", "")
 
-    # szukamy pierwszej liczby (z opcjonalnym przecinkiem/kropką jako groszami)
     match = re.search(r"(\d+)([.,]\d+)?", cleaned)
     if not match:
         return None
@@ -50,9 +47,12 @@ def extract_capacity_gb(title: str):
         return int(gb_match.group(1))
 
     return None
+
+
+def price_in_range(price_text: str, price_min, price_max) -> bool:
     """
     Sprawdza czy cena mieści się w podanym zakresie.
-    Jeśli nie da się odczytać ceny -> domyślnie PRZEPUSZCZAMY ogłoszenie
+    Jeśli nie da się odczytać ceny - domyślnie PRZEPUSZCZAMY ogłoszenie
     (lepiej pokazać coś, co trzeba ręcznie zweryfikować, niż przegapić okazję),
     ale info o tym leci do konsoli.
     """
