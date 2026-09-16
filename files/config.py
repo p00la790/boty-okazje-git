@@ -7,9 +7,6 @@ Tu wpisujesz swoje ustawienia. Nie musisz nic więcej zmieniać w kodzie.
 import os
 
 # ---------- DISCORD ----------
-# Webhooki wczytywane z DWÓCH miejsc, w tej kolejności:
-# 1. Plik secrets_local.py (na Twoim komputerze, NIGDY nie trafia na GitHub)
-# 2. Zmienne środowiskowe (używane przez GitHub Actions)
 try:
     from secrets_local import CATEGORY_WEBHOOKS as _LOCAL_WEBHOOKS
 except ImportError:
@@ -25,28 +22,14 @@ CATEGORY_WEBHOOKS = {
 }
 
 # ---------- CO SZUKAMY ----------
+# iPhone: TYLKO Vinted (mniej scamów niż OLX/Allegro w Twoim doświadczeniu).
+# iPad i MacBook: wszystkie 3 platformy, żeby maksymalizować liczbę trafień.
 SEARCHES = [
     {
-        "name": "iPhone vinted",
+        "name": "iPhone Vinted",
         "platform": "vinted",
         "category": "iphone",
-        "search_url": "https://www.vinted.pl/catalog?search_text=iphone&search_id=2726194668&catalog[]=3661&page=1&time=1788453620&status_ids[]=2",
-        "price_min": 100,
-        "price_max": 1000,
-    },
-    {
-        "name": "iPhone Olx",
-        "platform": "olx",
-        "category": "iphone",
-        "search_url": "https://www.olx.pl/elektronika/telefony/q-iphone/",
-        "price_min": 100,
-        "price_max": 5000,
-    },
-    {
-        "name": "iPhone Allegro Lokalnie",
-        "platform": "allegro_lokalnie",
-        "category": "iphone",
-        "search_url": "https://allegrolokalnie.pl/oferty/q/iphone",
+        "search_url": "https://www.vinted.pl/catalog?search_text=iphone&catalog[]=3661&status_ids[]=2",
         "price_min": 100,
         "price_max": 5000,
     },
@@ -54,9 +37,9 @@ SEARCHES = [
         "name": "iPad Vinted",
         "platform": "vinted",
         "category": "ipad",
-        "search_url": "https://www.vinted.pl/catalog?search_text=ipad&search_id=2762314829&catalog[]=3728&page=1&time=1788538349",
+        "search_url": "https://www.vinted.pl/catalog?search_text=ipad&catalog[]=3728",
         "price_min": 100,
-        "price_max": 1000,
+        "price_max": 3200,
     },
     {
         "name": "iPad olx",
@@ -64,7 +47,7 @@ SEARCHES = [
         "category": "ipad",
         "search_url": "https://www.olx.pl/elektronika/tablety/q-ipad/",
         "price_min": 100,
-        "price_max": 1000,
+        "price_max": 3200,
     },
     {
         "name": "iPad allegro lokalnie",
@@ -78,9 +61,9 @@ SEARCHES = [
         "name": "MacBook Vinted",
         "platform": "vinted",
         "category": "macbook",
-        "search_url": "https://www.vinted.pl/catalog?search_text=macbook&search_id=2650017637&catalog[]=3580&page=1&time=1788280927",
+        "search_url": "https://www.vinted.pl/catalog?search_text=macbook&catalog[]=3580",
         "price_min": 100,
-        "price_max": 1000,
+        "price_max": 5500,
     },
     {
         "name": "MacBook olx",
@@ -88,7 +71,7 @@ SEARCHES = [
         "category": "macbook",
         "search_url": "https://www.olx.pl/elektronika/komputery/q-macbook/",
         "price_min": 100,
-        "price_max": 5000,
+        "price_max": 5500,
     },
     {
         "name": "MacBook allegro lokalnie",
@@ -96,79 +79,7 @@ SEARCHES = [
         "category": "macbook",
         "search_url": "https://allegrolokalnie.pl/oferty/q/macbook",
         "price_min": 100,
-        "price_max": 5000,
-    },
-    {
-        "name": "iMac Vinted",
-        "platform": "vinted",
-        "category": "imac",
-        "search_url": "https://www.vinted.pl/catalog?search_text=imac&search_id=2650083261&catalog[]=3581&page=1&time=1788280975",
-        "price_min": 100,
-        "price_max": 4200,
-    },
-    {
-        "name": "iMac olx",
-        "platform": "olx",
-        "category": "imac",
-        "search_url": "https://www.olx.pl/elektronika/komputery/q-imac/",
-        "price_min": 100,
-        "price_max": 4200,
-    },
-    {
-        "name": "iMac allegro lokalnie",
-        "platform": "allegro_lokalnie",
-        "category": "imac",
-        "search_url": "https://allegrolokalnie.pl/oferty/q/imac",
-        "price_min": 100,
-        "price_max": 4200,
-    },
-    {
-        "name": "Apple Watch Vinted",
-        "platform": "vinted",
-        "category": "applewatch",
-        "search_url": "https://www.vinted.pl/catalog?search_text=apple%20watch&search_id=2634006299&page=1&time=1788281112&catalog[]=3035&brand_ids[]=54661",
-        "price_min": 50,
-        "price_max": 2500,
-    },
-    {
-        "name": "Apple Watch olx",
-        "platform": "olx",
-        "category": "applewatch",
-        "search_url": "https://www.olx.pl/elektronika/zegarki/q-apple%20watch/",
-        "price_min": 50,
-        "price_max": 2500,
-    },
-    {
-        "name": "Apple Watch allegro lokalnie",
-        "platform": "allegro_lokalnie",
-        "category": "applewatch",
-        "search_url": "https://allegrolokalnie.pl/oferty/q/apple%20watch",
-        "price_min": 50,
-        "price_max": 2500,
-    },
-    {
-        "name": "Mac mini Vinted",
-        "platform": "vinted",
-        "category": "macmini",
-        "search_url": "https://www.vinted.pl/catalog?search_text=mac%20mini&search_id=2650193993&page=1&time=1788281166&catalog[]=3581&brand_ids[]=54661",
-        "price_min": 50,
-        "price_max": 3500,
-    },
-    {
-        "name": "Mac mini olx",
-        "platform": "olx",
-        "category": "macmini",
-        "search_url": "https://www.olx.pl/oferty/q-mac%20mini/",
-        "price_min": 50,
-        "price_max": 3500,
-    },
-    {
-        "name": "Mac mini allegro lokalnie",
-        "platform": "allegro_lokalnie",
-        "category": "macmini",
-        "search_url": "https://allegrolokalnie.pl/oferty/q/mac%20mini",
-        "price_min": 50,
-        "price_max": 3500,
+        "price_max": 5500,
     },
 ]
 
@@ -242,7 +153,7 @@ BLACKLIST_PHRASES = [
     "nie wysylam przez vinted",
 ]
 
-OLX_REQUIRE_SHIPPING_BADGE = True
+OLX_REQUIRE_SHIPPING_BADGE = False
 
 ONLY_SEND_ACTUAL_DEALS = True
 
@@ -326,32 +237,21 @@ IGNORED_MODEL_KEYWORDS = [
     "mac mini 2009", "mac mini 2010", "mac mini 2011", "mac mini 2012",
 ]
 
-CHECK_INTERVAL_MINUTES = 5
-REQUEST_DELAY_SECONDS = 5
+CHECK_INTERVAL_MINUTES = 10
+REQUEST_DELAY_SECONDS = 3
 SEEN_FILE = "seen.json"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
 # ---------- TRYB "TYLKO WYBRANE" ----------
-# Pozwala chwilowo zawęzić bota bez USUWANIA reszty wyszukiwań z SEARCHES.
-# Zostaw puste listy [] żeby używać WSZYSTKICH platform/kategorii (normalny tryb).
-#
-# Przykład: żeby sprawdzać TYLKO Vinted i TYLKO iPhone:
-#   ACTIVE_PLATFORMS = ["vinted"]
-#   ACTIVE_CATEGORIES = ["iphone"]
-#
-# Żeby wrócić do sprawdzania wszystkiego - po prostu wyczyść obie listy: [].
-ACTIVE_PLATFORMS = ["vinted"]    # np. ["vinted"] albo ["vinted", "olx"]
-ACTIVE_CATEGORIES = ["ipad", "macbook"]   # imac/macmini/applewatch odstawione na teraz
+# Zostaw puste listy [] żeby używać WSZYSTKICH platform/kategorii z SEARCHES.
+ACTIVE_PLATFORMS = []
+ACTIVE_CATEGORIES = ["iphone", "ipad", "macbook"]   # imac/macmini/applewatch odstawione na teraz
 
-# ---------- TRYB "SZUKAJ USZKODZONYCH" (do samodzielnej naprawy i flipa) ----------
-# Dla kategorii na tej liście bot ODWRACA logikę: zamiast ODRZUCAĆ ogłoszenia
-# z uszkodzonym ekranem/baterią, będzie ich AKTYWNIE SZUKAŁ (bo je naprawiasz).
-# Dla pozostałych kategorii (np. macbook, ipad) nic się nie zmienia - tam nadal
-# szukamy sprawnego sprzętu w dobrej cenie.
-DAMAGE_HUNTING_CATEGORIES = ["iphone"]
+# ---------- TRYB "SZUKAJ USZKODZONYCH" ----------
+# PUSTE = wyłączone. Teraz szukamy TYLKO sprawnego sprzętu we wszystkich
+# kategoriach (iPhone też wrócił do normalnego trybu - bez uszkodzeń).
+DAMAGE_HUNTING_CATEGORIES = []
 
-# Frazy wskazujące na uszkodzenie EKRANU lub BATERII - to jest to, czego
-# teraz aktywnie szukamy dla kategorii z DAMAGE_HUNTING_CATEGORIES.
 DAMAGE_KEYWORDS = [
     "pęknięty ekran", "pekniety ekran",
     "stłuczony wyświetlacz", "stluczony wyswietlacz",
@@ -369,8 +269,6 @@ DAMAGE_KEYWORDS = [
     "pajączek na ekranie", "pajaczek na ekranie",
 ]
 
-# Te frazy ZAWSZE odrzucamy, nawet w trybie "szukaj uszkodzonych" - bo to
-# albo niemożliwe do naprawy, albo zbyt ryzykowne prawnie/technicznie.
 DAMAGE_HARD_EXCLUDE = [
     "icloud lock", "blokada icloud", "simlock", "sim lock", "zablokowany",
     "skradziony", "kradziony", "zalany", "zalana", "utopiony", "utopiona",
