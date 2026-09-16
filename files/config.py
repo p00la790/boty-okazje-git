@@ -244,7 +244,7 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 # ---------- TRYB "TYLKO WYBRANE" ----------
 # Zostaw puste listy [] żeby używać WSZYSTKICH platform/kategorii z SEARCHES.
-ACTIVE_PLATFORMS = []
+ACTIVE_PLATFORMS = ["vinted"]
 ACTIVE_CATEGORIES = ["iphone", "ipad", "macbook"]   # imac/macmini/applewatch odstawione na teraz
 
 # ---------- TRYB "SZUKAJ USZKODZONYCH" ----------
