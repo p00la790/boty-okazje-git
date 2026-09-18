@@ -31,7 +31,7 @@ SEARCHES = [
         "category": "iphone",
         "search_url": "https://www.vinted.pl/catalog?search_text=iphone&catalog[]=3661&status_ids[]=2",
         "price_min": 100,
-        "price_max": 5000,
+        "price_max": 1000,
     },
     {
         "name": "iPad Vinted",
@@ -39,7 +39,7 @@ SEARCHES = [
         "category": "ipad",
         "search_url": "https://www.vinted.pl/catalog?search_text=ipad&catalog[]=3728",
         "price_min": 100,
-        "price_max": 3200,
+        "price_max": 1000,
     },
     {
         "name": "iPad olx",
@@ -63,7 +63,7 @@ SEARCHES = [
         "category": "macbook",
         "search_url": "https://www.vinted.pl/catalog?search_text=macbook&catalog[]=3580",
         "price_min": 100,
-        "price_max": 5500,
+        "price_max": 1000,
     },
     {
         "name": "MacBook olx",
