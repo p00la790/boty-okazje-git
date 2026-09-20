@@ -34,6 +34,14 @@ SEARCHES = [
         "price_max": 1000,
     },
     {
+        "name": "iPhone Uszkodzone Vinted",
+        "platform": "vinted",
+        "category": "iphone",
+        "search_url": "https://www.vinted.pl/catalog?search_text=iphone_uszkodzone&catalog[]=3661&status_ids[]=2",
+        "price_min": 100,
+        "price_max": 1000,
+    },
+    {
         "name": "iPad Vinted",
         "platform": "vinted",
         "category": "ipad",
