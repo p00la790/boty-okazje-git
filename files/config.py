@@ -166,6 +166,16 @@ BLACKLIST_PHRASES = [
     "NIE WYSYLAM DO POLSKI"
     "NIE WYSYŁAM DO POLSKI"
     "przycisk kup teraz"
+    "Wysyłka vinted odpada"
+    "Wysylka vinted odpada"
+    "można pisać sms"
+    "mozna pisac sms"
+    "mój portfel vinted nie działa"
+    "moj portfel vinted nie dziala"
+    "portfel vinted nie działa"
+    "portfel vinted nie dziala"
+    "Metoda płatności na dwie raty"
+    "Metoda platnosci na dwie raty"
 ]
 
 OLX_REQUIRE_SHIPPING_BADGE = False
