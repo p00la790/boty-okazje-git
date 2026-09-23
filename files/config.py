@@ -159,6 +159,13 @@ BLACKLIST_PHRASES = [
     "Dlatego taka cena ponieważ bardzo pilnie potrzebuje szybko pieniędzy",
     "nie wysyłam przez vinted",
     "nie wysylam przez vinted",
+    "wyslyam tylko zdjecia"
+    "wysyłam tylko zdjęcia"
+    "wysylam zdjecia"
+    "wysyłam zdjęcia"
+    "NIE WYSYLAM DO POLSKI"
+    "NIE WYSYŁAM DO POLSKI"
+    "przycisk kup teraz"
 ]
 
 OLX_REQUIRE_SHIPPING_BADGE = False
